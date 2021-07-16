@@ -8,7 +8,7 @@ namespace DataStructurePrograms
         {
             Console.WriteLine("Data Structure Programs");
             Console.WriteLine("*******************MENU*******************");
-            Console.WriteLine("1.Unordered List\n2.Exit\nEnter Your Option");
+            Console.WriteLine("1.Unordered List\n2.Ordered List\n3.Exit\nEnter Your Option");
             switch (Convert.ToInt32(Console.ReadLine()))
             {
                 case 1:
@@ -16,6 +16,10 @@ namespace DataStructurePrograms
                     ul.UnorderList();
                     break;
                 case 2:
+                    UnOrderedList<int> ol = new UnOrderedList<int>();
+                    ol.OrderList();
+                    break;
+                case 3:
                     Console.WriteLine("Exited");
                     break;
             }

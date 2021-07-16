@@ -36,14 +36,58 @@ namespace DataStructurePrograms
             Display();
 
             //write contents from linked list to file
-            WriteToFile();
+            WriteToFile(filePath);
+            Console.WriteLine("\nContents ADDED to the file");
+
+
+
+        }
+        public void OrderList()
+        {
+            string filePath = @"C:\Users\NARD'S IDEAPAD\source\repos\DataStructurePrograms\DataStructurePrograms\OrderListItems.txt";
+            string fileContents = File.ReadAllText(filePath);
+            string[] fileListString = fileContents.Split(" ");
+
+            List<T> fileList = new List<T>();
+            foreach(string i in fileListString)
+            {
+                T x = (T)Convert.ChangeType(i, typeof(T));
+                fileList.Add(x);
+            }
+
+            foreach (T i in fileList)
+            {
+                
+                InsertAtLast(i);
+            }
+            Console.WriteLine("************ADDED ALL ELEMENTS************");
+
+
+            Console.WriteLine("The content in the list is\n");
+            Display();
+            Sort();
+            Console.WriteLine("\nAfter Sorting");
+            Display();
+            Console.WriteLine("\nEnter the word need to be searched in file:");
+            int Word =Convert.ToInt32(Console.ReadLine());
+            T findWord = (T)Convert.ChangeType(Word, typeof(T));
+
+            //search word in linked list 
+            Search(findWord);
+            Sort();
+
+            Console.WriteLine("\nThe content in the list is\n");
+            Display();
+
+            //write contents from linked list to file
+            WriteToFile(filePath);
             Console.WriteLine("\nContents ADDED to the file");
 
 
 
         }
 
-      
+
 
         //method for insert at last
         public void InsertAtLast(T val)
@@ -220,18 +264,28 @@ namespace DataStructurePrograms
             }
             
           }
-        public void WriteToFile()
+        public void WriteToFile(string filePath)
         {
             Node<T> temp = this.head;
 
             string res = string.Empty;
             while (temp != null)
             {
-                res = res + temp.data +" ";
+                if (temp.next != null)
+                {
+                    res = res + temp.data + " ";
+
+                }
+                else
+                {
+                    res = res + temp.data;
+                }
+
                 temp = temp.next;
             }
-
-            File.WriteAllText(@"C:\Users\NARD'S IDEAPAD\source\repos\DataStructurePrograms\DataStructurePrograms\Listitems.txt", res);
+            
+            //String output = new String(res);
+            File.WriteAllText(filePath, res);
         }
 
         public int Size()
