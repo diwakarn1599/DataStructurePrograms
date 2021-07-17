@@ -15,7 +15,7 @@ namespace DataStructurePrograms
         public void CashCounter()
         {
             //list of persons to insert into the queue
-            List<string> persons = new List<string> { "Person1", "Person2", "Person3", "Person4", "Person5" };
+            List<string> persons = new List<string> {"Person1", "Person2", "Person3", "Person4", "Person5" };
             foreach(string i in persons)
             {
                 T x = (T)Convert.ChangeType(i, typeof(T));
@@ -112,6 +112,7 @@ namespace DataStructurePrograms
             }
 
         }
+
 
         public void Display()
         {

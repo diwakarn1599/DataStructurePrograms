@@ -8,7 +8,7 @@ namespace DataStructurePrograms
         {
             Console.WriteLine("Data Structure Programs");
             Console.WriteLine("*******************MENU*******************");
-            Console.WriteLine("1.Unordered List\n2.Ordered List\n3.Balanced Paranthesis\n4.Cash Counter\n5.Exit\nEnter Your Option");
+            Console.WriteLine("1.Unordered List\n2.Ordered List\n3.Balanced Paranthesis\n4.Cash Counter\n5.Palindrome Checker\n6.Exit\nEnter Your Option");
             switch (Convert.ToInt32(Console.ReadLine()))
             {
                 case 1:
@@ -28,6 +28,10 @@ namespace DataStructurePrograms
                     bcc.CashCounter();
                     break;
                 case 5:
+                    PalindromeChecker<char> pc = new PalindromeChecker<char>();
+                    pc.CheckPalindrome();
+                    break;
+                case 6:
                     Console.WriteLine("Exited");
                     break;
             }
