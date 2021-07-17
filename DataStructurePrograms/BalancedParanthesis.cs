@@ -6,10 +6,15 @@ namespace DataStructurePrograms
 {
     class BalancedParanthesis<T> where T:IComparable
     {
+        //initialising top node
         Node<T> top;
+
+        //Method for performing operation
         public void CheckParanthesis()
         {
+            //expression
             string Expression = "((5+6)";
+            //convert it to string
             char[] expArray = Expression.ToCharArray();
 
             foreach(char i in expArray)
@@ -18,15 +23,18 @@ namespace DataStructurePrograms
                 if (i == '(')
                 {
                     T x = (T)Convert.ChangeType(i, typeof(T));
+                    //push into stack
                     Push(x);
                     Display();
                 }
                 else if (i == ')')
                 {
+                    //pop from stact
                     Pop();
                     Display();
                 }
             }
+            //validation whether expression is valid or not
            if(Size() > 0)
             {
                 Console.WriteLine("Un Balanced Expression");
@@ -53,7 +61,7 @@ namespace DataStructurePrograms
             this.top = temp;
         }
 
-
+        //method to retreive top element of stack
         public void Peek()
         {
             if (this.top == null)
@@ -65,6 +73,7 @@ namespace DataStructurePrograms
                 Console.WriteLine($"Top element of stack is {this.top.data}");
             }
         }
+        //Method to retreive and remove top element of stack
         public void Pop()
         {
             if (this.top == null)
@@ -78,7 +87,7 @@ namespace DataStructurePrograms
                 top = top.next;
             }
         }
-
+        //Display STack
         public void Display()
         {
             Node<T> temp = this.top;
