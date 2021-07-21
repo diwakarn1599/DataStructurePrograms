@@ -4,15 +4,15 @@ using System.Text;
 
 namespace DataStructurePrograms
 {
-    class PrimeNumbersRange
+    class PrimeNumbersRange<T> where T:IComparable
     {
         //Initialising array members
         public static int r = 0, ind = 0;
         // 2d - Array for prime numbers 
-        public int[,] primeNumbers = new int[10, 100];
-        public int[,] AnagramNumbers = new int[10, 100];
-        public int[,] notAnagramNumbers = new int[10, 100];
-
+        public T[,] primeNumbers = new T[10, 100];
+        public T[,] AnagramNumbers = new T[10, 100];
+        public T[,] notAnagramNumbers = new T[10, 100];
+        Node<T> top = null;
         /// <summary>
         /// Find prime in range
         /// </summary>
@@ -31,30 +31,31 @@ namespace DataStructurePrograms
                
                 if (FindPrime(i))
                 {
-                    primeNumbers[r, ind] = i;
+                    primeNumbers[r, ind] = (T)Convert.ChangeType(i, typeof(T));
                     ind++;
                 }
                 count++;
             }
-            Console.WriteLine("Prime numbers in range");
-            Print(primeNumbers);
+            //Console.WriteLine("Prime numbers in range");
+            //Print(primeNumbers);
             FindAnagram();
             Console.WriteLine("Anagram numbers in range");
             Print(AnagramNumbers);
-            Console.WriteLine("Not Anagram numbers in range");
-            Print(notAnagramNumbers);
+            Console.WriteLine("Anagrams in reverse order");
+            DisplayList();
+
         }
 
         /// <summary>
         /// Print the ARRAY
         /// </summary>
-        public void Print(int[,] twoDArray)
+        public void Print(T[,] twoDArray)
         {
             for (int i = 0; i < 10; i++)
             {
                 for (int j = 0; j < 100; j++)
                 {
-                    if (twoDArray[i, j] != 0)
+                    if (twoDArray[i, j].CompareTo((T)Convert.ChangeType(0, typeof(T)))> 0)
                     {
                         Console.WriteLine(twoDArray[i, j]);
                     }
@@ -70,7 +71,7 @@ namespace DataStructurePrograms
             {
                 for (int j = 0; j < 100; j++)
                 {
-                    if (primeNumbers[i, j] != 0 && primeNumbers[i, j] > 10)
+                    if (primeNumbers[i, j].CompareTo((T)Convert.ChangeType(0, typeof(T))) > 0)
                     {
                         char[] charArr = primeNumbers[i, j].ToString().ToCharArray();
                         Array.Sort(charArr);
@@ -92,6 +93,8 @@ namespace DataStructurePrograms
                         {
                             AnagramNumbers[i, ind++] = primeNumbers[i, j];
                             AnagramNumbers[i, ind++] = primeNumbers[i, k];
+                            Insert(primeNumbers[i, j]);
+                            Insert(primeNumbers[i, k]);
 
                         }
                        
@@ -105,13 +108,13 @@ namespace DataStructurePrograms
                 for (int j = 0; j < 100; j++)
                 {
                     flag = 0;
-                    if (primeNumbers[i, j] != 0)
+                    if (primeNumbers[i, j].CompareTo((T)Convert.ChangeType(0, typeof(T)))>0)
                     {
                         for (int p = 0; p < 10 && flag!=1; p++)
                         {
                             for(int q = 0; q < 100; q++)
                             {
-                                if (primeNumbers[i, j] == AnagramNumbers[p, q])
+                                if (primeNumbers[i, j].CompareTo(AnagramNumbers[p, q])==0)
                                 {
                                     flag = 1;
                                     break;
@@ -164,5 +167,29 @@ namespace DataStructurePrograms
                 }
             return isPrime;
          }
+
+
+        public void Insert(T data)
+        {
+            Node<T> temp = new Node<T>(data);
+            if (this.top == null)
+            {
+                temp.next = null;
+            }
+            else
+            {
+                temp.next = this.top;
+            }
+            this.top = temp;
+        }
+        public void DisplayList()
+        {
+            Node<T> temp = this.top;
+            while (temp != null)
+            {
+                Console.WriteLine($"|__{temp.data}__|");
+                temp = temp.next;
+            }
+        }
     }
 }

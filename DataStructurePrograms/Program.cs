@@ -37,7 +37,7 @@ namespace DataStructurePrograms
                     hs.CheckNumber();
                     break;
                 case 7:
-                    PrimeNumbersRange pnr = new PrimeNumbersRange();
+                    PrimeNumbersRange<int> pnr = new PrimeNumbersRange<int>();
                     pnr.FindPrimeInRange();
                     break;
                 case 8:
