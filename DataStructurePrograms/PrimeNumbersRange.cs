@@ -13,6 +13,8 @@ namespace DataStructurePrograms
         public T[,] AnagramNumbers = new T[10, 100];
         public T[,] notAnagramNumbers = new T[10, 100];
         Node<T> top = null;
+        Node<T> front;
+        Node<T> rear;
         /// <summary>
         /// Find prime in range
         /// </summary>
@@ -41,8 +43,10 @@ namespace DataStructurePrograms
             FindAnagram();
             Console.WriteLine("Anagram numbers in range");
             Print(AnagramNumbers);
-            Console.WriteLine("Anagrams in reverse order");
-            DisplayList();
+            //Console.WriteLine("Anagrams in reverse order");
+            //DisplayList();
+            Console.WriteLine("Anagrams in Queue order");
+            DisplayQueue();
 
         }
 
@@ -93,8 +97,10 @@ namespace DataStructurePrograms
                         {
                             AnagramNumbers[i, ind++] = primeNumbers[i, j];
                             AnagramNumbers[i, ind++] = primeNumbers[i, k];
-                            Insert(primeNumbers[i, j]);
-                            Insert(primeNumbers[i, k]);
+                            //Insert(primeNumbers[i, j]);
+                            //Insert(primeNumbers[i, k]);
+                            Enqueue(primeNumbers[i, j]);
+                            Enqueue(primeNumbers[i, k]);
 
                         }
                        
@@ -168,7 +174,10 @@ namespace DataStructurePrograms
             return isPrime;
          }
 
-
+        /// <summary>
+        /// insert into stack
+        /// </summary>
+        /// <param name="data"></param>
         public void Insert(T data)
         {
             Node<T> temp = new Node<T>(data);
@@ -182,12 +191,48 @@ namespace DataStructurePrograms
             }
             this.top = temp;
         }
+        /// <summary>
+        /// display stack
+        /// </summary>
         public void DisplayList()
         {
             Node<T> temp = this.top;
             while (temp != null)
             {
                 Console.WriteLine($"|__{temp.data}__|");
+                temp = temp.next;
+            }
+        }
+        /// <summary>
+        /// insert into queue
+        /// </summary>
+        /// <param name="val"></param>
+        public void Enqueue(T val)
+        {
+            Node<T> temp = new Node<T>(val);
+            if (this.front == null)
+            {
+
+                this.front = temp;
+                this.rear = temp;
+                temp.next = null;
+            }
+            else
+            {
+                this.rear.next = temp;
+                this.rear = temp;
+            }
+        }
+        /// <summary>
+        /// display queue
+        /// </summary>
+        public void DisplayQueue()
+        {
+            Console.WriteLine("\n");
+            Node<T> temp = this.front;
+            while (temp != null)
+            {
+                Console.Write($"|__{temp.data}__|");
                 temp = temp.next;
             }
         }
