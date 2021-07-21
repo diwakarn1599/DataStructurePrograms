@@ -8,7 +8,7 @@ namespace DataStructurePrograms
         {
             Console.WriteLine("Data Structure Programs");
             Console.WriteLine("*******************MENU*******************");
-            Console.WriteLine("1.Unordered List\n2.Ordered List\n3.Balanced Paranthesis\n4.Cash Counter\n5.Palindrome Checker\n6.Hashing Slots\n7.Prime Number in Range\n8.Calendar\n9.Queue Using stacks\n10.Exit\nEnter Your Option");
+            Console.WriteLine("1.Unordered List\n2.Ordered List\n3.Balanced Paranthesis\n4.Cash Counter\n5.Palindrome Checker\n6.Hashing Slots\n7.Prime Number in Range\n8.Calendar\n9.Queue Using stacks\n10.Number of bst\n11.Exit\nEnter Your Option");
             switch (Convert.ToInt32(Console.ReadLine()))
             {
                 case 1:
@@ -49,6 +49,10 @@ namespace DataStructurePrograms
                     qus.Enqueue(3);
                     break;
                 case 10:
+                    NoOfBst bst = new NoOfBst();
+                    bst.NoOfBinarySearchTree();
+                    break;
+                case 11:
                     Console.WriteLine("Exited");
                     break;
             }
